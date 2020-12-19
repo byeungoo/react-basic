@@ -11,6 +11,7 @@ class App extends Component {
   //내부적으로 사용하는건 안에 컴포넌트안에 state로 감춤
   constructor(props){
     super(props);
+    this.max_content_id = 3;  //UI에 영향을 주지 않는 값은 state 값으로 안해도 됨.
     this.state = {
       mode : 'read',
       selected_content_id:2,
@@ -47,7 +48,24 @@ class App extends Component {
 
       _article = <ReadContent title={_title} desc={_desc}></ReadContent>;
     } else if(this.state.mode === 'create'){
-      _article = <CreateContent></CreateContent>;
+      _article = <CreateContent onSubmit={function(_title, _desc) {
+        this.max_content_id = this.max_content_id + 1;
+        
+        //push는 원본을 바꿈. 성능 바꿀 때 힘들어짐
+        // this.state.contents.push(
+        //   {id:this.max_content_id, title:_title, desc:_desc}
+        // );
+
+        //concat은 원본은 그대로임. state를 변경할 때는 concat을 사용하기
+        var _contents = this.state.contents.concat(
+          {id:this.max_content_id, title:_title, desc:_desc}
+        );
+
+        this.setState({
+          contents: _contents
+        });
+
+      }.bind(this)}></CreateContent>;
     }
 
     return(
