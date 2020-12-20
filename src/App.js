@@ -14,7 +14,7 @@ class App extends Component {
     this.max_content_id = 3;  //UI에 영향을 주지 않는 값은 state 값으로 안해도 됨.
     this.state = {
       mode : 'read',
-      selected_content_id:2,
+      selected_content_id:1,
       subject:{title: 'WEB', sub:'World Wide Web!'},
       welcome:{title:'Welcome', desc:'Hello React!!'},
       contents:[
