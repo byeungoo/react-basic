@@ -1,6 +1,20 @@
 import React, { Component } from 'react';
 
 class TOC extends Component{
+    //render() 함수가 실행될지 안될지 개발자가 결정할 수 있도록하는 함수
+    //여기서 true를 반환하여 render함수가 실행됨
+    shouldComponentUpdate(newProps, newState){
+        console.log('===>TOC render shouldComponentUpdate'
+            ,newProps.data
+            ,this.props.data
+        )
+
+        if(this.props.data === newProps.data){
+            return false;
+        }
+
+        return true;
+    }
     render(){
         console.log('TOC Render');
         var lists = [];
